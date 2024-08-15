@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ms.notifications.dto.EmailDto;
+import com.ms.notifications.dto.EmailStatusDto;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -38,6 +39,6 @@ public interface EmailDoc {
             )
         }
     )
-    ResponseEntity<Object> send(@RequestBody EmailDto emailDto);
+    ResponseEntity<EmailStatusDto> send(@RequestBody EmailDto emailDto);
 
 }

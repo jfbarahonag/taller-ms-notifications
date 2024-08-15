@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ms.notifications.controllers.docs.EmailDoc;
 import com.ms.notifications.dto.EmailDto;
+import com.ms.notifications.dto.EmailStatusDto;
 import com.ms.notifications.services.EmailService;
 
 import lombok.AllArgsConstructor;
@@ -18,12 +19,18 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/email/v1")
 public class EmailController implements EmailDoc {
 
-    private EmailService emailService;
+    private final EmailService emailService;
 
     @Override
     @PostMapping("/send")
-    public ResponseEntity<Object> send(@RequestBody EmailDto emailDto) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<EmailStatusDto> send(@RequestBody EmailDto emailDto) {
+        
+        EmailStatusDto status = emailService.sendSimpleEmail(emailDto);
+        
+        if (!status.isSuccess()) {
+            return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
 }
