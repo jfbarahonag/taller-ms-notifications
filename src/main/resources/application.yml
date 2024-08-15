@@ -12,6 +12,20 @@ spring:
         properties:
             '[mail.smtp.auth]': true
             '[mail.smtp.starttls.enable]': true
+    datasource:
+        url: jdbc:postgresql://localhost:5434/email_db
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                jdbc:
+                    lob:
+                        '[non_contextual_creation]': true
+                    id:
+                        '[new_generator_mappings]': false
 springdoc:
     api-docs:
         path: /api-notifications-docs
