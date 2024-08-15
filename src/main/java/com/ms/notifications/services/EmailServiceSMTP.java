@@ -28,8 +28,8 @@ public class EmailServiceSMTP implements EmailService {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
 
             mailMessage.setFrom(sender);
-            mailMessage.setTo(String.join(",", emailDto.getTo()));
-            mailMessage.setBcc(String.join(",", emailDto.getBcc()));
+            mailMessage.setTo(emailDto.getTo().toArray(String[]::new));
+            mailMessage.setBcc(emailDto.getBcc().toArray(String[]::new));
             mailMessage.setSubject(emailDto.getSubject());
             mailMessage.setText(emailDto.getBody());
             // Sending the mail
