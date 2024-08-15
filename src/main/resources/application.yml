@@ -12,3 +12,7 @@ spring:
         properties:
             '[mail.smtp.auth]': true
             '[mail.smtp.starttls.enable]': true
+springdoc:
+    api-docs:
+        path: /api-notifications-docs
+    packages-to-scan: com.ms.notifications.controllers
