@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/email/v1")
+@RequestMapping("/v1/email")
 public class EmailController implements EmailDoc {
 
     private final EmailService emailService;

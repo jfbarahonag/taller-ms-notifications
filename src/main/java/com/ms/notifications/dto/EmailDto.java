@@ -16,7 +16,6 @@ public record EmailDto(
     List<String> to,
     
     @NotNull
-    @NotEmpty
     @Size(max = 5)
     List<String> bcc,
     
