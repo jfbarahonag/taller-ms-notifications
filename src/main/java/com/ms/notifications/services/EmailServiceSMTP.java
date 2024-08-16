@@ -1,9 +1,6 @@
 package com.ms.notifications.services;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailAuthenticationException;
-import org.springframework.mail.MailParseException;
-import org.springframework.mail.MailSendException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -24,40 +21,22 @@ public class EmailServiceSMTP implements EmailService {
 
     @Override
     public EmailStatusDto sendSimpleEmail(EmailDto emailDto) {
-        try {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
+        
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-            mailMessage.setFrom(sender);
-            mailMessage.setTo(emailDto.to().toArray(String[]::new));
-            mailMessage.setBcc(emailDto.bcc().toArray(String[]::new));
-            mailMessage.setSubject(emailDto.subject());
-            mailMessage.setText(emailDto.body());
-            // Sending the mail
-            javaMailSender.send(mailMessage);
-            return EmailStatusDto
-                    .builder()
-                    .success(true)
-                    .details("Email sent successfully")
-                    .build();
-        } catch (MailSendException e) {
-            return EmailStatusDto
-                    .builder()
-                    .success(false)
-                    .details("Failure sending the email")
-                    .build();
-        } catch (MailParseException e) {
-            return EmailStatusDto
-                    .builder()
-                    .success(false)
-                    .details("Failure parsing the email")
-                    .build();
-        } catch (MailAuthenticationException e) {
-            return EmailStatusDto
-                    .builder()
-                    .success(false)
-                    .details("Failure authenticating")
-                    .build();
-        }
+        mailMessage.setFrom(sender);
+        mailMessage.setTo(emailDto.to().toArray(String[]::new));
+        mailMessage.setBcc(emailDto.bcc().toArray(String[]::new));
+        mailMessage.setSubject(emailDto.subject());
+        mailMessage.setText(emailDto.body());
+        // Sending the mail
+        javaMailSender.send(mailMessage);
+        return EmailStatusDto
+                .builder()
+                .success(true)
+                .details("Email sent successfully")
+                .build();
+        
     }
 
 }
