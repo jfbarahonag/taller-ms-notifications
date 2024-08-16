@@ -27,7 +27,7 @@ public class EmailController implements EmailDoc {
         
         EmailStatusDto status = emailService.sendSimpleEmail(emailDto);
         
-        if (!status.isSuccess()) {
+        if (!status.success()) {
             return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(status, HttpStatus.OK);
